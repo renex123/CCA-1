@@ -106,7 +106,7 @@ export const AnalyticsReportsPage: React.FC = () => {
           value="4.7 Hours"
           change="35% faster with CampusOne"
           isPositive={true}
-          icon={<Clock className="w-5 h-5 text-purple-600" />}
+          icon={<Clock className="w-5 h-5 text-indigo-600" />}
         />
 
         <StatCard

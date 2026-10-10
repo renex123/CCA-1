@@ -148,8 +148,8 @@ export const AttendancePage: React.FC = () => {
       {role === 'faculty' && (
         <>
           {activeSession ? (
-            <Card className="border-2 border-indigo-500 dark:border-indigo-600 overflow-hidden shadow-lg">
-              <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 text-white flex items-center justify-between">
+            <Card className="border-2 border-slate-800 dark:border-slate-700 overflow-hidden shadow-lg">
+              <div className="bg-slate-900 dark:bg-slate-950 border-b border-slate-800 p-4 text-white flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
                   <span className="text-xs font-extrabold uppercase tracking-wider">

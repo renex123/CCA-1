@@ -68,7 +68,7 @@ export const StudentProfilePage: React.FC = () => {
 
       {/* Hero Profile Card */}
       <Card className="overflow-hidden">
-        <div className="h-32 bg-gradient-to-r from-indigo-700 via-purple-700 to-indigo-900" />
+        <div className="h-32 bg-slate-900 dark:bg-slate-950 border-b border-slate-800" />
         <CardContent className="relative px-6 pb-6 pt-0">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 -mt-14 mb-6">
             <div className="flex items-end gap-4">

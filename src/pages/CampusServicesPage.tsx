@@ -121,7 +121,7 @@ export const CampusServicesPage: React.FC = () => {
     {
       type: 'id_card_replacement',
       label: 'ID Card Replacement',
-      icon: <CreditCard className="w-5 h-5 text-purple-600" />,
+      icon: <CreditCard className="w-5 h-5 text-amber-600" />,
       desc: 'Re-issue lost or damaged RFID Smart Campus ID Card with photo reprint.',
     },
     {

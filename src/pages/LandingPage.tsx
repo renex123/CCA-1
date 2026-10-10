@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import {
   GraduationCap,
   QrCode,
@@ -18,11 +19,14 @@ import {
   Lock,
   Search,
   BookOpen,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
 export const LandingPage: React.FC = () => {
   const { quickSwitchRole } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleDemoAccess = (role: 'student' | 'faculty' | 'admin') => {
@@ -80,7 +84,19 @@ export const LandingPage: React.FC = () => {
             </a>
           </nav>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+              aria-label="Toggle theme"
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-600" />
+              )}
+            </button>
             <Link to="/login">
               <Button variant="ghost" size="sm" className="text-xs">
                 Staff & Student Login

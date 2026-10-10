@@ -230,7 +230,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isMobileOpen, onMobileClose })
         {/* User Card & Logout Footer */}
         {user && (
           <div className="p-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
-            <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl bg-white dark:bg-slate-850 border border-slate-200/60 dark:border-slate-800">
+            <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-800">
               <img
                 src={
                   user.avatar_url ||

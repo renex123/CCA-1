@@ -134,8 +134,8 @@ export const AdminDashboard: React.FC = () => {
           title="Faculty Members"
           value={totalFaculty}
           subtitle="18 Professors & 62 Lecturers"
-          icon={<Building2 className="w-5 h-5 text-purple-600" />}
-          iconBgColor="bg-purple-50 dark:bg-purple-950/60"
+          icon={<Building2 className="w-5 h-5 text-sky-600" />}
+          iconBgColor="bg-sky-50 dark:bg-sky-950/60"
         />
 
         <StatCard

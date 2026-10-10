@@ -161,7 +161,7 @@ export const FacultyDashboard: React.FC = () => {
           title="Today's Classes"
           value={`${timetable.length} Lectures`}
           subtitle="LH-204 & CS-LAB-302"
-          icon={<Clock className="w-5 h-5 text-purple-600" />}
+          icon={<Clock className="w-5 h-5 text-sky-600" />}
         />
 
         <StatCard
