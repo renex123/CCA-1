@@ -35,7 +35,7 @@ import { Button } from '../components/ui/Button';
 const DotGrid: React.FC<{ className?: string }> = ({ className }) => (
   <svg className={className} width="130" height="90" fill="none" xmlns="http://www.w3.org/2000/svg">
     <pattern id="dot-grid-pattern-violet" x="0" y="0" width="13" height="13" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1.75" className="fill-violet-500/35 dark:fill-violet-400/25" />
+      <circle cx="2" cy="2" r="1.75" className="fill-violet-500/40 dark:fill-violet-400/30" />
     </pattern>
     <rect width="100%" height="100%" fill="url(#dot-grid-pattern-violet)" />
   </svg>
@@ -58,8 +58,8 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0b0f17] text-slate-900 dark:text-slate-100 font-sans selection:bg-violet-600 selection:text-white">
-      {/* Top Institutional Notification Bar */}
-      <div className="bg-[#120a24] dark:bg-[#0d071a] text-violet-200 text-[11px] py-1.5 px-4 text-center border-b border-violet-900/60 flex items-center justify-center gap-3">
+      {/* Top Institutional Notification Bar — Deep Violet Mix */}
+      <div className="bg-[#140a28] dark:bg-[#0c061a] text-violet-200 text-[11px] py-1.5 px-4 text-center border-b border-violet-900/60 flex items-center justify-center gap-3">
         <span className="font-semibold text-white">BPUT Affiliated Autonomous Colleges</span>
         <span className="text-violet-400/40">•</span>
         <span>Spring Semester 2026 Academic Operations</span>
@@ -67,11 +67,11 @@ export const LandingPage: React.FC = () => {
         <span className="hidden sm:inline text-violet-300 font-medium">Digital Campus Portal Active</span>
       </div>
 
-      {/* Main Navigation — Crisp White with Violet Accents */}
+      {/* Main Navigation — Luminous White with Violet Accents */}
       <header className="sticky top-0 z-40 bg-white/95 dark:bg-[#0e0c1a]/95 backdrop-blur-md border-b border-violet-100 dark:border-violet-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-violet-600 text-white flex items-center justify-center font-bold text-base shadow-md shadow-violet-500/25">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 to-violet-700 text-white flex items-center justify-center font-bold text-base shadow-md shadow-violet-500/25">
               <GraduationCap className="w-5 h-5" />
             </div>
             <div>
@@ -124,7 +124,7 @@ export const LandingPage: React.FC = () => {
             </Link>
             <button
               onClick={() => handleDemoAccess('student')}
-              className="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold shadow-sm shadow-violet-500/20 transition-all cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-500 hover:to-violet-600 text-white text-xs font-semibold shadow-md shadow-violet-500/20 transition-all cursor-pointer"
             >
               Launch Portal
             </button>
@@ -132,8 +132,12 @@ export const LandingPage: React.FC = () => {
         </div>
       </header>
 
-      {/* Hero Section — Crisp White & Vibrant Violet Palette */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-violet-50/70 via-white to-white dark:from-[#120d24] dark:via-[#0c0817] dark:to-[#0b0f17] border-b border-violet-100 dark:border-violet-950/80 pt-10 pb-16 lg:py-20">
+      {/* Hero Section — Dynamic White & Violet Blend with Ambient Mesh Glows */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-violet-100/70 via-white to-violet-50/80 dark:from-[#140c26] dark:via-[#0c0817] dark:to-[#0b0f17] border-b border-violet-100 dark:border-violet-950/80 pt-10 pb-16 lg:py-20">
+        {/* Soft Violet Ambient Light Orbs */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-violet-200/50 dark:bg-violet-900/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-violet-100/60 dark:bg-violet-950/30 blur-2xl pointer-events-none" />
+
         {/* Background Violet Dot Matrix Accents */}
         <div className="absolute top-6 right-6 lg:right-16 pointer-events-none opacity-80">
           <DotGrid />
@@ -157,10 +161,10 @@ export const LandingPage: React.FC = () => {
                 <span className="text-violet-950 dark:text-violet-200 font-extrabold">HIGHER EDUCATION</span>
               </div>
 
-              {/* Main Headline */}
+              {/* Main Headline — Crisp White and Violet Blend */}
               <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.12]">
                 One Campus.<br />
-                <span className="text-violet-600 dark:text-violet-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-violet-500 to-indigo-600 dark:from-violet-400 dark:via-violet-300 dark:to-indigo-300">
                   Smarter Possibilities.
                 </span>
               </h1>
@@ -170,8 +174,8 @@ export const LandingPage: React.FC = () => {
                 A centralized digital platform connecting students, faculty, and college administrators. Replaces paper certificates, manual attendance registers, disjointed notice boards, and room scheduling conflicts with verified cryptographic records.
               </p>
 
-              {/* Insights & Trust Badge in White and Violet */}
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-[#120a22]/90 backdrop-blur-md border border-violet-200/90 dark:border-violet-800/60 shadow-sm shadow-violet-500/5 flex items-center gap-3.5 max-w-xl">
+              {/* Insights & Trust Badge in White & Violet Blend */}
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-white/95 dark:bg-[#120a22]/90 backdrop-blur-md border-2 border-violet-200/90 dark:border-violet-800/70 shadow-md shadow-violet-500/5 flex items-center gap-3.5 max-w-xl">
                 <div className="w-9 h-9 rounded-xl bg-violet-100 dark:bg-violet-950/80 text-violet-600 dark:text-violet-300 flex items-center justify-center shrink-0 border border-violet-200 dark:border-violet-800">
                   <Award className="w-5 h-5" />
                 </div>
@@ -185,12 +189,12 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Buttons — White and Violet Mix */}
               <div className="space-y-4 pt-2">
                 <div className="flex flex-wrap items-center gap-3">
                   <button
                     onClick={() => handleDemoAccess('student')}
-                    className="px-6 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-sm font-bold shadow-md shadow-violet-500/25 hover:shadow-lg hover:shadow-violet-500/35 transition-all flex items-center gap-2.5 cursor-pointer"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-500 hover:to-violet-600 text-white text-sm font-bold shadow-lg shadow-violet-500/25 hover:shadow-violet-500/35 transition-all flex items-center gap-2.5 cursor-pointer"
                   >
                     <span>Explore CampusOne Portal</span>
                     <ArrowRight className="w-4 h-4" />
@@ -198,31 +202,31 @@ export const LandingPage: React.FC = () => {
 
                   <button
                     onClick={() => setIsTourModalOpen(true)}
-                    className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-violet-200 dark:border-violet-800/80 hover:bg-violet-50 dark:hover:bg-violet-950/40 text-violet-900 dark:text-violet-200 text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+                    className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border-2 border-violet-200 dark:border-violet-800 hover:bg-violet-50 dark:hover:bg-violet-950/40 text-violet-900 dark:text-violet-200 text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer shadow-xs"
                   >
                     <Play className="w-4 h-4 fill-violet-600 text-violet-600 dark:fill-violet-400 dark:text-violet-400" />
                     <span>Watch Interactive Tour</span>
                   </button>
                 </div>
 
-                {/* Direct Persona Jump Links */}
+                {/* Direct Persona Jump Links in Crisp White with Violet Borders */}
                 <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
                   <span className="text-slate-500 dark:text-slate-400 font-semibold">1-Click Personas:</span>
                   <button
                     onClick={() => handleDemoAccess('student')}
-                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-violet-400 hover:text-violet-600 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
+                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-violet-500 hover:text-violet-700 text-slate-700 dark:text-slate-300 border border-violet-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
                   >
                     🎓 Student (Aarav)
                   </button>
                   <button
                     onClick={() => handleDemoAccess('faculty')}
-                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-violet-400 hover:text-violet-600 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
+                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-violet-500 hover:text-violet-700 text-slate-700 dark:text-slate-300 border border-violet-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
                   >
                     👩‍🏫 Faculty (Dr. Priya)
                   </button>
                   <button
                     onClick={() => handleDemoAccess('admin')}
-                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-violet-400 hover:text-violet-600 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
+                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-violet-500 hover:text-violet-700 text-slate-700 dark:text-slate-300 border border-violet-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
                   >
                     🏛️ Dean (Dr. Rajesh)
                   </button>
@@ -230,13 +234,13 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Organic Shaped Campus Photo with Video Play Trigger & Floating Badges */}
+            {/* Right Column: Organic Shaped Campus Photo in Violet Frame with White Cards */}
             <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
               {/* Soft Violet Glowing Decorative Disc in Background */}
-              <div className="absolute -bottom-6 -right-4 w-40 h-40 rounded-full bg-violet-400/30 dark:bg-violet-600/20 blur-lg -z-0 pointer-events-none" />
+              <div className="absolute -bottom-6 -right-4 w-44 h-44 rounded-full bg-gradient-to-tr from-violet-500/40 via-violet-300/30 to-indigo-400/20 blur-xl -z-0 pointer-events-none" />
 
               {/* Organic Curved Photo Container in Crisp Violet Frame */}
-              <div className="relative z-10 w-full max-w-[460px] aspect-[4/3] sm:aspect-[1.15/1] rounded-[2.5rem] lg:rounded-[3rem] border-4 border-violet-500/90 dark:border-violet-500 shadow-2xl shadow-violet-500/20 overflow-hidden bg-violet-50 dark:bg-slate-800">
+              <div className="relative z-10 w-full max-w-[460px] aspect-[4/3] sm:aspect-[1.15/1] rounded-[2.5rem] lg:rounded-[3rem] border-4 border-violet-500/90 dark:border-violet-400 shadow-2xl shadow-violet-500/20 overflow-hidden bg-violet-50 dark:bg-slate-800">
                 <img
                   src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1000&auto=format&fit=crop&q=80"
                   alt="University students collaborating happily outdoors on campus"
@@ -246,8 +250,8 @@ export const LandingPage: React.FC = () => {
                 {/* Subtle dark vignette gradient at bottom */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#140a26]/70 via-transparent to-black/20 pointer-events-none" />
 
-                {/* Top Floating Badge */}
-                <div className="absolute top-4 left-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-violet-200/80 dark:border-violet-800 shadow-md flex items-center gap-2">
+                {/* Top Floating Badge in Crisp White with Violet Accent */}
+                <div className="absolute top-4 left-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-violet-200/90 dark:border-violet-800 shadow-md flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-violet-600 animate-pulse" />
                   <span className="text-[11px] font-bold text-violet-900 dark:text-violet-200">
                     Spring 2026 Live Session
@@ -257,15 +261,15 @@ export const LandingPage: React.FC = () => {
                 {/* Center Interactive Tour Play Button — Pure White with Violet Icon */}
                 <button
                   onClick={() => setIsTourModalOpen(true)}
-                  className="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-violet-600 shadow-2xl shadow-violet-600/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer group ring-4 ring-violet-200/60 dark:ring-violet-900/60"
+                  className="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-violet-600 shadow-2xl shadow-violet-600/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer group ring-4 ring-violet-200/70 dark:ring-violet-900/70"
                   aria-label="Play Interactive Campus Platform Tour"
                   title="Click to view interactive platform walkthrough"
                 >
                   <Play className="w-7 h-7 fill-violet-600 ml-1 group-hover:scale-110 transition-transform" />
                 </button>
 
-                {/* Bottom Floating Telemetry Card in Crisp White */}
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-3 rounded-2xl border border-violet-200/80 dark:border-violet-800 shadow-lg flex items-center justify-between">
+                {/* Bottom Floating Telemetry Card in Crisp White & Violet Pill */}
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-3 rounded-2xl border-2 border-violet-200/90 dark:border-violet-800 shadow-lg flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="flex -space-x-2">
                       <img
@@ -301,23 +305,23 @@ export const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Operational Metrics Counter Bar in White and Violet */}
-          <div className="mt-12 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-violet-100 dark:border-violet-950 shadow-sm shadow-violet-500/5">
+          {/* Operational Metrics Counter Bar — White & Violet Blend */}
+          <div className="mt-12 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-2xl bg-gradient-to-br from-white via-white to-violet-50/60 dark:from-slate-900 dark:to-slate-900 border-2 border-violet-100 dark:border-violet-900/60 shadow-md shadow-violet-500/5">
             <div>
               <p className="text-2xl sm:text-3xl font-extrabold font-mono text-violet-600 dark:text-violet-400">16,000+</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Enrolled Students</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 font-medium">Enrolled Students</p>
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-extrabold font-mono text-violet-600 dark:text-violet-400">94.2%</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Verified QR Attendance</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 font-medium">Verified QR Attendance</p>
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-extrabold font-mono text-violet-600 dark:text-violet-400">&lt; 4.7 hrs</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Avg Grievance SLA</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 font-medium">Avg Grievance SLA</p>
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-extrabold font-mono text-violet-600 dark:text-violet-400">100%</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Paperless Bonafide Certs</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 font-medium">Paperless Bonafide Certs</p>
             </div>
           </div>
         </div>
@@ -350,7 +354,7 @@ export const LandingPage: React.FC = () => {
         {/* 6-Card Responsive Bento Grid with Real University Photography & Violet Badges */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Card 1: Smart Lecture Theatres (Spans 2 columns on wide screens) */}
-          <div className="lg:col-span-2 group relative rounded-3xl overflow-hidden border border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
+          <div className="lg:col-span-2 group relative rounded-3xl overflow-hidden border-2 border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
             <img
               src="https://images.unsplash.com/photo-1577495508048-b635879837f1?w=1000&auto=format&fit=crop&q=80"
               alt="Grand university lecture theater"
@@ -359,7 +363,7 @@ export const LandingPage: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-[#100720] via-[#100720]/40 to-transparent" />
             <div className="relative z-10 space-y-2">
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white">
+                <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white shadow-sm shadow-violet-500/20">
                   Academic Timetable
                 </span>
                 <span className="text-xs text-violet-200 font-medium">42 Connected Halls</span>
@@ -374,7 +378,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Card 2: Central University Library */}
-          <div className="group relative rounded-3xl overflow-hidden border border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
+          <div className="group relative rounded-3xl overflow-hidden border-2 border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
             <img
               src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop&q=80"
               alt="University central library and study hall"
@@ -382,7 +386,7 @@ export const LandingPage: React.FC = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#100720] via-[#100720]/40 to-transparent" />
             <div className="relative z-10 space-y-2">
-              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white">
+              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white shadow-sm shadow-violet-500/20">
                 Digital Services
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -395,7 +399,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Card 3: Hackathons & Student Innovation */}
-          <div className="group relative rounded-3xl overflow-hidden border border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
+          <div className="group relative rounded-3xl overflow-hidden border-2 border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
             <img
               src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80"
               alt="Students collaborating at hackathon"
@@ -403,7 +407,7 @@ export const LandingPage: React.FC = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#100720] via-[#100720]/40 to-transparent" />
             <div className="relative z-10 space-y-2">
-              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white">
+              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white shadow-sm shadow-violet-500/20">
                 Campus Events
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -416,7 +420,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Card 4: Dynamic QR Attendance In Action */}
-          <div className="group relative rounded-3xl overflow-hidden border border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
+          <div className="group relative rounded-3xl overflow-hidden border-2 border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
             <img
               src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80"
               alt="Faculty and students in interactive class"
@@ -424,7 +428,7 @@ export const LandingPage: React.FC = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#100720] via-[#100720]/40 to-transparent" />
             <div className="relative z-10 space-y-2">
-              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white">
+              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white shadow-sm shadow-violet-500/20">
                 Fraud Resistant
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -437,7 +441,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Card 5: Campus Directory & Green Walkways */}
-          <div className="group relative rounded-3xl overflow-hidden border border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
+          <div className="group relative rounded-3xl overflow-hidden border-2 border-violet-100 dark:border-violet-900/60 bg-slate-900 shadow-sm min-h-[320px] flex flex-col justify-end p-6 sm:p-8">
             <img
               src="https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop&q=80"
               alt="Historic brick college campus walkway"
@@ -445,7 +449,7 @@ export const LandingPage: React.FC = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#100720] via-[#100720]/40 to-transparent" />
             <div className="relative z-10 space-y-2">
-              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white">
+              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-violet-600 text-white shadow-sm shadow-violet-500/20">
                 Leaflet GPS
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -460,7 +464,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Core Operational Modules — Clean White Background with Violet Accents */}
-      <section id="modules" className="py-16 bg-white dark:bg-slate-900 border-y border-violet-100 dark:border-violet-950">
+      <section id="modules" className="py-16 bg-gradient-to-b from-white via-violet-50/30 to-white dark:from-slate-900 dark:via-[#100720] dark:to-slate-900 border-y border-violet-100 dark:border-violet-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
             <p className="text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400">
@@ -515,7 +519,7 @@ export const LandingPage: React.FC = () => {
             ].map((m) => (
               <div
                 key={m.code}
-                className="p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 hover:border-violet-400 dark:hover:border-violet-500 hover:bg-white dark:hover:bg-slate-900 hover:shadow-lg hover:shadow-violet-500/5 transition-all flex flex-col justify-between group"
+                className="p-5 rounded-2xl bg-white dark:bg-slate-950 border border-violet-100 dark:border-slate-800 hover:border-violet-400 dark:hover:border-violet-500 hover:shadow-xl hover:shadow-violet-500/10 transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -551,7 +555,7 @@ export const LandingPage: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:border-violet-400 dark:hover:border-violet-600 transition-colors">
+          <div className="p-6 rounded-2xl border-2 border-violet-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:border-violet-400 dark:hover:border-violet-600 transition-colors">
             <span className="text-xs font-mono font-bold text-violet-600 dark:text-violet-400">STEP 01</span>
             <h3 className="text-base font-bold text-slate-900 dark:text-white mt-2">
               Authentication & Role Boundaries
@@ -561,7 +565,7 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:border-violet-400 dark:hover:border-violet-600 transition-colors">
+          <div className="p-6 rounded-2xl border-2 border-violet-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:border-violet-400 dark:hover:border-violet-600 transition-colors">
             <span className="text-xs font-mono font-bold text-violet-600 dark:text-violet-400">STEP 02</span>
             <h3 className="text-base font-bold text-slate-900 dark:text-white mt-2">
               Real-Time Validation & Processing
@@ -571,7 +575,7 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:border-violet-400 dark:hover:border-violet-600 transition-colors">
+          <div className="p-6 rounded-2xl border-2 border-violet-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:border-violet-400 dark:hover:border-violet-600 transition-colors">
             <span className="text-xs font-mono font-bold text-violet-600 dark:text-violet-400">STEP 03</span>
             <h3 className="text-base font-bold text-slate-900 dark:text-white mt-2">
               Audited Telemetry & Accreditation
@@ -583,9 +587,9 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Role Access / Demo Presets */}
+      {/* Role Access / Demo Presets — Deep Violet & White Contrast */}
       <section id="live-demo" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-violet-950 via-[#1e1338] to-[#120a24] text-white border border-violet-800/60 shadow-2xl shadow-violet-950/40">
+        <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#1b0d38] via-[#241249] to-[#120724] text-white border-2 border-violet-700/60 shadow-2xl shadow-violet-950/50">
           <div className="max-w-3xl">
             <p className="text-xs font-mono uppercase tracking-widest text-violet-300 font-bold">
               Evaluation & Judging Console
@@ -600,21 +604,21 @@ export const LandingPage: React.FC = () => {
             <div className="mt-8 flex flex-wrap gap-3">
               <button
                 onClick={() => handleDemoAccess('student')}
-                className="px-5 py-3 rounded-xl bg-white text-violet-950 text-xs font-bold hover:bg-violet-50 transition-colors flex items-center gap-2 cursor-pointer shadow-sm"
+                className="px-5 py-3 rounded-xl bg-white text-violet-950 text-xs font-bold hover:bg-violet-50 transition-colors flex items-center gap-2 cursor-pointer shadow-md shadow-white/10"
               >
                 <GraduationCap className="w-4 h-4 text-violet-600" />
                 Student: Aarav Sharma (23CSE104)
               </button>
               <button
                 onClick={() => handleDemoAccess('faculty')}
-                className="px-5 py-3 rounded-xl bg-violet-900/60 hover:bg-violet-800/60 text-white border border-violet-700/60 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer"
+                className="px-5 py-3 rounded-xl bg-violet-900/80 hover:bg-violet-800 text-white border border-violet-600/60 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <Users className="w-4 h-4 text-violet-300" />
                 Faculty: Dr. Priya Sengupta
               </button>
               <button
                 onClick={() => handleDemoAccess('admin')}
-                className="px-5 py-3 rounded-xl bg-violet-900/60 hover:bg-violet-800/60 text-white border border-violet-700/60 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer"
+                className="px-5 py-3 rounded-xl bg-violet-900/80 hover:bg-violet-800 text-white border border-violet-600/60 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <ShieldCheck className="w-4 h-4 text-violet-300" />
                 Admin: Dr. Rajesh Verma (Dean)
@@ -648,7 +652,7 @@ export const LandingPage: React.FC = () => {
       {/* Interactive Platform Tour Modal (Triggered by Play Button in Hero) */}
       {isTourModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-[#120a22] border border-violet-200 dark:border-violet-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-[#120a22] border-2 border-violet-200 dark:border-violet-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setIsTourModalOpen(false)}
               className="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-violet-600 dark:hover:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-950/50 cursor-pointer"
