@@ -393,65 +393,71 @@ export const CampusServicesPage: React.FC = () => {
           }
         >
           {/* Certificate Printable Canvas */}
-          <div className="p-8 border-4 border-double border-indigo-900 bg-white text-slate-900 rounded-xl relative shadow-inner space-y-6">
+          <div className="p-8 sm:p-10 border-4 border-double border-slate-800 bg-[#fefefe] text-slate-900 rounded-xl relative shadow-md space-y-6 font-serif">
             {/* Header / Seal */}
-            <div className="text-center border-b-2 border-indigo-900/30 pb-4">
-              <div className="w-14 h-14 rounded-full bg-indigo-900 text-white flex items-center justify-center mx-auto mb-2 font-black text-xl shadow-md">
-                <GraduationCap className="w-8 h-8" />
+            <div className="text-center border-b-2 border-slate-800 pb-4">
+              <div className="w-14 h-14 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto mb-2 font-black text-xl shadow-xs">
+                <GraduationCap className="w-7 h-7" />
               </div>
-              <h2 className="text-xl font-extrabold uppercase tracking-wide text-indigo-950">
-                CampusOne Institute of Technology
+              <h2 className="text-lg sm:text-xl font-bold uppercase tracking-wider text-slate-950 font-serif">
+                CampusOne Institute of Technology & Sciences
               </h2>
-              <p className="text-[11px] text-slate-600 uppercase font-semibold">
-                Autonomous University • Approved by AICTE & UGC • Tech Campus Road
+              <p className="text-[11px] text-slate-600 font-sans tracking-wide">
+                (An Autonomous Institution Affiliated to Biju Patnaik University of Technology, Odisha)
               </p>
-              <span className="inline-block mt-2 text-xs font-mono font-bold px-3 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-800 rounded-full">
-                REF: {viewingCertificate.certificate_issued_id || 'CERT-BNF-2026-CSE-104'}
-              </span>
+              <p className="text-[10px] text-slate-500 font-sans mt-0.5">
+                Approved by AICTE, Ministry of Education, Govt. of India • Accredited 'A+' Grade by NAAC
+              </p>
+              <div className="flex items-center justify-between mt-4 text-[11px] font-sans border-t border-slate-200 pt-2 text-slate-600">
+                <span><strong>Ref No:</strong> CIT/ACAD/2026/BNF-{viewingCertificate.student_enrollment}</span>
+                <span><strong>Date of Issue:</strong> {new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+              </div>
             </div>
 
             {/* Certificate Title */}
-            <div className="text-center">
-              <h3 className="text-lg font-black uppercase tracking-widest text-indigo-900 underline decoration-indigo-300 underline-offset-4">
-                BONAFIDE CERTIFICATE
+            <div className="text-center font-sans">
+              <h3 className="text-base font-extrabold uppercase tracking-widest text-slate-900 underline decoration-slate-400 underline-offset-4">
+                TO WHOMSOEVER IT MAY CONCERN
               </h3>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-1">
+                BONAFIDE STUDENT CERTIFICATE
+              </p>
             </div>
 
             {/* Certificate Body Text */}
-            <div className="text-sm text-slate-800 leading-relaxed space-y-4">
+            <div className="text-xs sm:text-sm text-slate-800 leading-relaxed space-y-3 font-serif">
               <p>
-                This is to certify that <strong>{viewingCertificate.student_name}</strong>, bearing University Registration / Roll Number <strong>{viewingCertificate.student_enrollment}</strong>, is a bonafide student of this Institute pursuing Bachelor of Technology (B.Tech) in <strong>{viewingCertificate.department_name}</strong> during the academic year <strong>2025–2026</strong> (Semester {viewingCertificate.semester}).
+                This is to certify that <strong>Mr./Ms. {viewingCertificate.student_name}</strong>, bearing University Registration / Roll Number <strong>{viewingCertificate.student_enrollment}</strong>, is a regular bonafide student of this Institute pursuing four-year Bachelor of Technology (B.Tech) degree programme in the Department of <strong>{viewingCertificate.department_name}</strong>.
               </p>
               <p>
-                His/Her conduct and character during this period of study have been recorded as <strong>EXCELLENT</strong>, and he/she has maintained consistent academic attendance above institutional standards.
+                He/She is currently studying in <strong>Semester {viewingCertificate.semester} (Academic Session 2025–2026)</strong>. According to institutional records, his/her academic progress and general conduct in the campus have been found to be <strong>GOOD</strong>, and he/she has maintained verified aggregate class attendance conforming to university regulations.
               </p>
               <p>
-                This certificate is officially issued upon student request for the purpose of: <em>"{viewingCertificate.reason}"</em>.
+                This certificate is granted upon his/her application dated {new Date(viewingCertificate.created_at).toLocaleDateString('en-IN')} for the purpose of: <em>"{viewingCertificate.reason}"</em>.
               </p>
             </div>
 
             {/* Signatures & QR Verification Seal */}
-            <div className="pt-6 border-t border-slate-200 flex items-end justify-between">
+            <div className="pt-6 border-t-2 border-slate-800 flex items-end justify-between font-sans">
               <div className="flex items-center gap-3">
-                <div className="p-1.5 border border-slate-300 rounded-lg">
+                <div className="p-1 border border-slate-400 bg-white rounded-md">
                   <QRCodeSVG
-                    value={`https://campusone.edu/verify/${viewingCertificate.certificate_issued_id || 'CERT-BNF-2026-CSE-104'}`}
+                    value={`https://bput.ac.in/verify/cert/${viewingCertificate.certificate_issued_id || 'CERT-BNF-2026-CSE-104'}`}
                     size={72}
                   />
                 </div>
                 <div className="text-[10px] text-slate-500">
-                  <p className="font-bold text-slate-700">Digital QR Verification</p>
-                  <p>Scan to verify authenticity on university ledger</p>
-                  <p className="font-mono text-indigo-600 mt-0.5">SHA-256 Verified</p>
+                  <p className="font-bold text-slate-800">QR Ledger Authentication</p>
+                  <p>Scan to verify with BPUT Records</p>
+                  <p className="font-mono text-emerald-700 font-semibold mt-0.5">Digitally Endorsed</p>
                 </div>
               </div>
 
               <div className="text-right">
-                <div className="text-indigo-900 font-serif font-bold italic text-base">
-                  Dr. Rajesh Verma
-                </div>
-                <p className="text-xs font-bold text-slate-900">Dean of Academic Affairs</p>
-                <p className="text-[10px] text-slate-500">CampusOne Digital Registrar</p>
+                <div className="w-28 border-b border-slate-400 mb-1" />
+                <p className="text-xs font-bold text-slate-900">Dr. Rajesh Verma</p>
+                <p className="text-[10px] font-semibold text-slate-600">Dean (Academic Affairs)</p>
+                <p className="text-[9px] text-slate-400">Office of the Deputy Registrar</p>
               </div>
             </div>
           </div>

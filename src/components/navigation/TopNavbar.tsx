@@ -109,13 +109,12 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ onMobileMenuToggle }) => {
             <RoleSwitcherPill />
           </div>
 
-          {/* CampusAI shortcut pill */}
+          {/* Campus AI Desk */}
           <Link
             to="/ai"
-            className="hidden xl:flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold rounded-xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-pink-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 transition-all"
+            className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors"
           >
-            <Sparkles className="w-3.5 h-3.5 text-indigo-500 animate-spin-slow" />
-            <span>CampusAI</span>
+            <span>Campus AI Desk</span>
           </Link>
 
           {/* Notifications */}

@@ -11,6 +11,7 @@ import {
   MapPin,
   PartyPopper,
   Sparkles,
+  Bot,
   Users,
   Building2,
   BarChart3,
@@ -94,11 +95,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isMobileOpen, onMobileClose })
       roles: ['student', 'faculty', 'admin'],
     },
     {
-      label: 'CampusAI Assistant',
+      label: 'Campus AI Helpdesk',
       path: '/ai',
-      icon: Sparkles,
+      icon: Bot,
       roles: ['student', 'faculty', 'admin'],
-      highlight: true,
     },
     // Admin Only
     {
@@ -161,26 +161,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ isMobileOpen, onMobileClose })
         {/* Brand Header */}
         <div className="h-16 flex items-center justify-between px-5 border-b border-slate-100 dark:border-slate-800">
           <NavLink to="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-sm">
-              <GraduationCap className="w-5 h-5" />
+            <div className="w-8 h-8 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold shadow-xs">
+              <GraduationCap className="w-4 h-4" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-base tracking-tight text-slate-900 dark:text-white">
-                  Campus<span className="text-indigo-600 dark:text-indigo-400">One</span>
+                <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-white">
+                  CampusOne
                 </span>
-                <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-sm">
-                  Smart
+                <span className="text-[9px] font-semibold px-1.5 py-0.2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded border border-slate-200 dark:border-slate-700">
+                  Portal
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 -mt-0.5 font-medium">Digital University OS</p>
+              <p className="text-[10px] text-slate-400 font-medium">BPUT Central Campus</p>
             </div>
           </NavLink>
 
           {onMobileClose && (
             <button
               onClick={onMobileClose}
-              className="lg:hidden p-1.5 text-slate-400 hover:text-slate-600 rounded-lg"
+              className="lg:hidden p-1.5 text-slate-400 hover:text-slate-600 rounded-lg cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -204,9 +204,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isMobileOpen, onMobileClose })
                   clsx(
                     'flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all group',
                     isActive
-                      ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-400 font-semibold'
-                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100',
-                    item.highlight && !isActive && 'text-indigo-600 dark:text-indigo-400'
+                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-semibold'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100'
                   )
                 }
               >
@@ -216,17 +215,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isMobileOpen, onMobileClose })
                       className={clsx(
                         'w-4 h-4 shrink-0 transition-colors',
                         isActive
-                          ? 'text-indigo-600 dark:text-indigo-400'
-                          : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300',
-                        item.highlight && 'text-indigo-500'
+                          ? 'text-slate-900 dark:text-white'
+                          : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300'
                       )}
                     />
                     <span className="flex-1 truncate">{item.label}</span>
-                    {item.highlight && (
-                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-indigo-600 text-white shadow-xs">
-                        AI
-                      </span>
-                    )}
                   </>
                 )}
               </NavLink>

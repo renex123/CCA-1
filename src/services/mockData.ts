@@ -17,12 +17,12 @@ import {
 export const DEMO_USERS: Record<string, UserProfile> = {
   student: {
     id: 'u-std-1',
-    email: 'aarav.sharma@campus.edu',
+    email: 'aarav.sharma@bput.ac.in',
     full_name: 'Aarav Sharma',
     role: 'student',
     department_id: 'dept-cse',
     department_name: 'Computer Science & Engineering',
-    enrollment_no: '23CSE104',
+    enrollment_no: '2301106104',
     semester: 6,
     batch: '2023-2027',
     section: 'A',

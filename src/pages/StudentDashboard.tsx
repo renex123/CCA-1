@@ -57,34 +57,41 @@ export const StudentDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Personalized Welcome Banner */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-indigo-900 via-indigo-850 to-slate-900 text-white shadow-xl relative overflow-hidden">
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-800/60 border border-indigo-700/60 text-xs font-semibold text-indigo-200 mb-3">
-              <GraduationCap className="w-3.5 h-3.5" />
-              <span>{user.department_name} • Semester {user.semester || 6}</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Welcome back, {user.full_name}! 👋
-            </h2>
-            <p className="mt-1 text-xs sm:text-sm text-indigo-200">
-              Roll No: <span className="font-mono font-bold text-white">{user.enrollment_no}</span> • Cumulative CGPA:{' '}
-              <span className="font-bold text-emerald-400">{user.cgpa || '8.74'} / 10</span>
-            </p>
+      <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+              {user.department_name}
+            </span>
+            <span className="text-[10px] font-semibold text-slate-500">
+              Semester {user.semester || 6} • Section {user.section || 'A'}
+            </span>
+            <span className="text-slate-300 dark:text-slate-700">•</span>
+            <span className="text-[10px] font-mono text-slate-500">
+              Roll: <strong className="text-slate-900 dark:text-slate-100">{user.enrollment_no}</strong>
+            </span>
           </div>
+          <h2 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">
+            {user.full_name}
+          </h2>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            Cumulative Academic Performance: <span className="font-bold text-slate-900 dark:text-slate-100">{user.cgpa || '8.74'} SGPA</span> • Status: <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Good Standing</span>
+          </p>
+        </div>
 
-          <div className="flex flex-wrap items-center gap-2.5">
-            <Link to="/attendance">
-              <Button size="sm" variant="success" leftIcon={<QrCode className="w-4 h-4" />}>
-                Scan Attendance
-              </Button>
-            </Link>
-            <Link to="/ai">
-              <Button size="sm" variant="secondary" leftIcon={<Sparkles className="w-4 h-4 text-indigo-600" />}>
-                Ask CampusAI
-              </Button>
-            </Link>
-          </div>
+        <div className="flex flex-wrap items-center gap-2.5">
+          <Link to="/attendance">
+            <button className="px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 transition-colors flex items-center gap-2 cursor-pointer shadow-xs">
+              <QrCode className="w-3.5 h-3.5" />
+              Check In Attendance
+            </button>
+          </Link>
+          <Link to="/complaints">
+            <button className="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer">
+              <AlertCircle className="w-3.5 h-3.5 text-slate-500" />
+              Lodge Grievance
+            </button>
+          </Link>
         </div>
       </div>
 

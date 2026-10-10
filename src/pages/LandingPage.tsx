@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   GraduationCap,
-  Sparkles,
   QrCode,
   AlertCircle,
   Calendar,
@@ -15,8 +14,10 @@ import {
   CheckCircle2,
   Users,
   Clock,
-  Compass,
-  Cpu,
+  Building2,
+  Lock,
+  Search,
+  BookOpen,
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
@@ -32,354 +33,297 @@ export const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-indigo-500 selection:text-white">
-      {/* Navigation Header */}
-      <nav className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
+    <div className="min-h-screen bg-[#fafbfc] dark:bg-[#0b0f17] text-slate-900 dark:text-slate-100 font-sans selection:bg-slate-900 selection:text-white">
+      {/* Top Institutional Notification Bar */}
+      <div className="bg-slate-900 dark:bg-slate-950 text-slate-300 text-[11px] py-1.5 px-4 text-center border-b border-slate-800 flex items-center justify-center gap-3">
+        <span className="font-semibold text-white">BPUT Affiliated Autonomous Colleges</span>
+        <span className="text-slate-600">•</span>
+        <span>Spring Semester 2026 Academic Operations</span>
+        <span className="text-slate-600 hidden sm:inline">•</span>
+        <span className="hidden sm:inline text-emerald-400 font-medium">Digital Campus Portal Active</span>
+      </div>
+
+      {/* Main Navigation */}
+      <header className="sticky top-0 z-40 bg-white/95 dark:bg-[#0f141f]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
-              <GraduationCap className="w-6 h-6" />
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold text-base shadow-xs">
+              <GraduationCap className="w-5 h-5" />
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-lg tracking-tight">
-                  Campus<span className="text-indigo-600 dark:text-indigo-400">One</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-base tracking-tight text-slate-900 dark:text-white">
+                  CampusOne
                 </span>
-                <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-md">
-                  v2.6
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                  Institutional OS
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-medium">Smart Campus Platform</p>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium -mt-0.5">
+                Integrated Campus Management System
+              </p>
             </div>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-600 dark:text-slate-300">
-            <a href="#features" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              Platform Features
+          <nav className="hidden md:flex items-center gap-7 text-xs font-medium text-slate-600 dark:text-slate-300">
+            <a href="#modules" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              Core Modules
             </a>
-            <a href="#how-it-works" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              How It Works
+            <a href="#workflows" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              Administrative Workflows
             </a>
-            <a href="#impact" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              Demonstrated Impact
+            <a href="#architecture" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              Security & RLS
             </a>
-            <a href="#demo" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              Live Roles
+            <a href="#live-demo" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              Role Access
             </a>
-          </div>
+          </nav>
 
           <div className="flex items-center gap-2.5">
             <Link to="/login">
-              <Button variant="ghost" size="sm">
-                Sign In
+              <Button variant="ghost" size="sm" className="text-xs">
+                Staff & Student Login
               </Button>
             </Link>
-            <Link to="/register">
-              <Button size="sm" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
-                Get Started
-              </Button>
-            </Link>
+            <button
+              onClick={() => handleDemoAccess('student')}
+              className="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 transition-colors cursor-pointer"
+            >
+              Launch Portal
+            </button>
           </div>
         </div>
-      </nav>
+      </header>
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-24 overflow-hidden border-b border-slate-200/60 dark:border-slate-800">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-50/50 via-transparent to-transparent dark:from-indigo-950/20 pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/60 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-semibold mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-500 animate-pulse" />
-              <span>National Hackathon 2026 Innovation Project</span>
+      <section className="pt-16 pb-20 border-b border-slate-200 dark:border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium mb-6">
+              <ShieldCheck className="w-3.5 h-3.5 text-slate-900 dark:text-slate-100" />
+              <span>National Hackathon 2026 • Autonomous Digital Campus Initiative</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-              One Campus. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
-                Smarter Possibilities.
-              </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.12]">
+              One Campus.<br />
+              Centralized Academic & Administrative Governance.
             </h1>
 
-            <p className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-              Your campus life, connected. Manage academics, discover campus services, stay informed, and get intelligent assistance — all in one centralized digital ecosystem.
+            <p className="mt-5 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              A single digital platform connecting students, faculty, and administrators. Replaces paper certificates, manual attendance registers, disjointed notice boards, and room scheduling conflicts with verified cryptographic records.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Button
-                size="lg"
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <button
                 onClick={() => handleDemoAccess('student')}
-                leftIcon={<GraduationCap className="w-5 h-5" />}
+                className="px-5 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
               >
-                Explore Student Desk
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
+                <GraduationCap className="w-4 h-4" />
+                Student Portal (Aarav Sharma)
+              </button>
+              <button
                 onClick={() => handleDemoAccess('faculty')}
-                leftIcon={<Users className="w-5 h-5" />}
+                className="px-5 py-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-2 cursor-pointer"
               >
-                Faculty Portal
-              </Button>
-              <Button
-                size="lg"
-                variant="secondary"
+                <Users className="w-4 h-4" />
+                Faculty Desk (Dr. Priya Sengupta)
+              </button>
+              <button
                 onClick={() => handleDemoAccess('admin')}
-                leftIcon={<ShieldCheck className="w-5 h-5" />}
+                className="px-5 py-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-2 cursor-pointer"
               >
-                Admin Command Center
-              </Button>
+                <ShieldCheck className="w-4 h-4" />
+                Dean / Admin Console (Dr. Rajesh Verma)
+              </button>
             </div>
 
-            {/* Quick Demo Credentials Info */}
-            <p className="mt-4 text-xs text-slate-400">
-              ⚡ Pre-loaded with demo accounts. Click any portal above to test live end-to-end workflows.
+            <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
+              ⚡ Pre-loaded with Spring 2026 semester data. Click any role above for direct evaluation access.
             </p>
           </div>
 
-          {/* Platform Preview Showcase */}
-          <div className="mt-14 relative max-w-5xl mx-auto rounded-2xl p-2 bg-gradient-to-b from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900 shadow-2xl">
-            <div className="rounded-xl bg-white dark:bg-slate-900 overflow-hidden border border-slate-200 dark:border-slate-800">
-              <div className="h-10 bg-slate-100 dark:bg-slate-800 flex items-center px-4 gap-2 border-b border-slate-200 dark:border-slate-700">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-rose-400" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                </div>
-                <div className="mx-auto text-xs font-mono text-slate-500 bg-white dark:bg-slate-900 px-4 py-1 rounded-md border border-slate-200 dark:border-slate-700">
-                  https://campusone.edu/dashboard/student
-                </div>
-              </div>
-
-              {/* Interactive Mock Dashboard Preview */}
-              <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50/50 dark:bg-slate-950/50">
-                <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600">
-                      <QrCode className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-400 font-semibold uppercase">Smart Attendance</p>
-                      <p className="text-lg font-bold text-slate-900 dark:text-white">88.8% Aggregate</p>
-                    </div>
-                  </div>
-                  <div className="mt-3 w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
-                    <div className="bg-emerald-500 h-full w-[88.8%]" />
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-lg bg-purple-50 dark:bg-purple-950 text-purple-600">
-                      <Clock className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-400 font-semibold uppercase">Next Class</p>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">Cloud Computing (LH-204)</p>
-                    </div>
-                  </div>
-                  <p className="mt-2 text-xs text-slate-500 font-medium">Starts in 45 mins • Dr. Priya Sengupta</p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-600">
-                      <Sparkles className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-400 font-semibold uppercase">CampusAI</p>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">Grounded Assistant</p>
-                    </div>
-                  </div>
-                  <p className="mt-2 text-xs text-indigo-600 dark:text-indigo-400 font-semibold">"Exam schedule verified"</p>
-                </div>
-              </div>
+          {/* Operational Metrics Banner */}
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+            <div>
+              <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">1,600+</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Enrolled Undergraduates</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">94.2%</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Verified QR Attendance</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">&lt; 4.7 hrs</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Avg Grievance SLA</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">100%</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paperless Bonafide Certs</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Feature Sections */}
-      <section id="features" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            Engineered For Excellence
-          </span>
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white mt-2">
-            Everything your campus needs in one digital ecosystem
+      {/* Core Operational Modules */}
+      <section id="modules" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            System Capabilities
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white mt-1">
+            Engineered for Everyday University Operations
           </h2>
-          <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
-            Say goodbye to physical paper slips, long office queues, unverified WhatsApp notices, and disjointed portals.
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 max-w-2xl">
+            Each module addresses verified institutional bottlenecks experienced by departmental staff and engineering students.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
             {
-              icon: <QrCode className="w-6 h-6 text-indigo-600" />,
-              title: 'Smart QR Attendance',
-              desc: 'Faculty generate time-limited QR sessions. Students scan to log attendance with server-side enrollment & expiry validation.',
-              tag: 'Demo 1',
+              code: 'MOD-01',
+              title: 'Dynamic QR Attendance Verification',
+              desc: 'Faculty generate time-limited QR sessions with 6-digit backup PINs. Server validates class roster, preventing proxy submissions.',
+              badge: 'Fraud Resistant',
             },
             {
-              icon: <AlertCircle className="w-6 h-6 text-rose-600" />,
-              title: 'Transparent Complaints',
-              desc: 'Report Wi-Fi, electricity, or lab equipment faults with photo attachments and track real-time resolution SLAs.',
-              tag: 'Demo 2',
+              code: 'MOD-02',
+              title: 'Grievance Redressal & SLA Tracking',
+              desc: 'Departmental ticket pipeline with photo upload, urgency classification, technician assignment, and transparent audit histories.',
+              badge: '2-48h SLA',
             },
             {
-              icon: <Calendar className="w-6 h-6 text-sky-600" />,
-              title: 'Timetable & Conflict Engine',
-              desc: 'Automated conflict detection prevents room and faculty double-booking with instant notification broadcast.',
-              tag: 'Demo 3',
+              code: 'MOD-03',
+              title: 'Timetable Scheduling & Conflict Engine',
+              desc: 'Conflict algorithm checks room allocation and faculty availability before schedule commits, preventing double-booking.',
+              badge: 'Automated Checks',
             },
             {
-              icon: <Sparkles className="w-6 h-6 text-purple-600" />,
-              title: 'CampusAI Assistant',
-              desc: 'Grounded in verified institutional regulations and student timetables. Never invents policies or dates.',
-              tag: 'Demo 4',
+              code: 'MOD-04',
+              title: 'Grounded Campus Knowledge Assistant',
+              desc: 'Answers queries regarding exam dates, library regulations, and syllabus using verified institutional handbooks and live timetables.',
+              badge: 'Handbook Grounded',
             },
             {
-              icon: <FileCheck className="w-6 h-6 text-emerald-600" />,
-              title: 'Digital Campus Services',
-              desc: 'Apply for Bonafide certificates, ID replacements, and hall tickets. Get digitally verified PDF documents.',
-              tag: 'Demo 5',
+              code: 'MOD-05',
+              title: 'Digital Services & QR-Verified Certs',
+              desc: 'Online bonafide and ID replacement applications. Approved requests generate official stamped documents with QR verification.',
+              badge: 'AICTE Compliant',
             },
             {
-              icon: <MapPin className="w-6 h-6 text-amber-600" />,
-              title: 'Interactive Campus Map',
-              desc: 'Find lecture halls, laboratories, food courts, and medical centers with OpenStreetMap navigation.',
-              tag: 'Leaflet GPS',
+              code: 'MOD-06',
+              title: 'Interactive Campus GPS Directory',
+              desc: 'Searchable directory of 8 key facilities, lecture blocks, labs, and health center with coordinates and operating hours.',
+              badge: 'Leaflet GPS',
             },
-            {
-              icon: <BarChart3 className="w-6 h-6 text-indigo-600" />,
-              title: 'Administrative Analytics',
-              desc: 'Institution-wide attendance metrics, complaint turnaround analysis, and CSV export for accreditations.',
-              tag: 'Analytics',
-            },
-            {
-              icon: <ShieldCheck className="w-6 h-6 text-teal-600" />,
-              title: 'Role-Based Security & RLS',
-              desc: 'Granular Row Level Security ensures students only access their records while faculty and admins have strict permissions.',
-              tag: 'Security',
-            },
-            {
-              icon: <Cpu className="w-6 h-6 text-blue-600" />,
-              title: 'Dual-Mode DB Architecture',
-              desc: 'Runs out-of-the-box in local reactive mode or connects seamlessly to Supabase PostgreSQL with 1-click migrations.',
-              tag: 'PostgreSQL',
-            },
-          ].map((feature, i) => (
+          ].map((m) => (
             <div
-              key={i}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:border-indigo-300 dark:hover:border-indigo-700 transition-all group"
+              key={m.code}
+              className="p-5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 transition-all flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 group-hover:scale-105 transition-transform">
-                  {feature.icon}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[11px] font-mono font-bold text-slate-400 dark:text-slate-500">
+                    {m.code}
+                  </span>
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    {m.badge}
+                  </span>
                 </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-                  {feature.tag}
-                </span>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                  {m.title}
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                  {m.desc}
+                </p>
               </div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                {feature.desc}
-              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* How it works */}
-      <section id="how-it-works" className="py-20 bg-slate-100/60 dark:bg-slate-900/40 border-y border-slate-200/80 dark:border-slate-800">
+      {/* Administrative Workflows */}
+      <section id="workflows" className="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-              End-to-End Workflow
-            </span>
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white mt-2">
-              How CampusOne Solves the Daily Bottlenecks
+          <div className="mb-12">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              End-to-End Governance
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white mt-1">
+              How CampusOne Replaces Fragmented University Systems
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="relative p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm mb-4">
-                1
-              </div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-2">
-                Unified Authentication
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-[#fafbfc] dark:bg-slate-950">
+              <span className="text-xs font-mono font-bold text-slate-400">STEP 01</span>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white mt-2">
+                Authentication & Role Boundaries
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Students, faculty, and administrators sign in with role-tailored dashboards. Public signups can never elevate to administrator privileges.
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                Students and faculty sign in with institutional credentials. Public registration is strictly restricted—administrator roles can never be self-assigned.
               </p>
             </div>
 
-            <div className="relative p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm mb-4">
-                2
-              </div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-2">
-                Automated Actions & Verification
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-[#fafbfc] dark:bg-slate-950">
+              <span className="text-xs font-mono font-bold text-slate-400">STEP 02</span>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white mt-2">
+                Real-Time Validation & Processing
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Attendance QR tokens expire dynamically. Complaint SLA timers begin upon submission. Timetable conflicts are detected prior to scheduling.
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                Attendance records verify timestamps against active faculty windows. Grievance tickets route automatically to relevant maintenance engineering desks.
               </p>
             </div>
 
-            <div className="relative p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm mb-4">
-                3
-              </div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-2">
-                Intelligent Assistance & Analytics
+            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-[#fafbfc] dark:bg-slate-950">
+              <span className="text-xs font-mono font-bold text-slate-400">STEP 03</span>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white mt-2">
+                Audited Telemetry & Accreditation
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                CampusAI answers students with citations from official handbook rules and live timetables. Admins export verified reports for audit compliance.
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                Privileged actions are recorded in immutable audit logs. Administrative reports export directly to CSV format for statutory NAAC/NIRF accreditation audits.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Role Demonstration Showcase for Judges */}
-      <section id="demo" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 text-white relative overflow-hidden shadow-2xl">
-          <div className="relative z-10 max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-300">
-              Interactive Hackathon Demo Mode
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mt-2">
-              Ready to test CampusOne live?
+      {/* Role Access / Demo Presets */}
+      <section id="live-demo" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-8 rounded-2xl bg-slate-900 text-white dark:bg-slate-950 border border-slate-800">
+          <div className="max-w-2xl">
+            <p className="text-xs font-mono uppercase tracking-widest text-slate-400 font-bold">
+              Evaluation & Judging Console
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mt-1 text-white">
+              Test CampusOne Workflows Live
             </h2>
-            <p className="mt-4 text-sm text-indigo-200 leading-relaxed">
-              Use the one-click demo presets below to jump directly into the full persona dashboards. No registration or manual credential setup required.
+            <p className="mt-3 text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Use the presets below to jump directly into each persona. The persistent database engine preserves your test actions (marking attendance, resolving tickets, generating certificates) across browser sessions.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-wrap gap-3">
               <button
                 onClick={() => handleDemoAccess('student')}
-                className="px-5 py-3 rounded-xl bg-white text-indigo-950 font-bold text-xs hover:bg-indigo-50 transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                className="px-4 py-2.5 rounded-lg bg-white text-slate-900 text-xs font-bold hover:bg-slate-100 transition-colors flex items-center gap-2 cursor-pointer"
               >
-                <GraduationCap className="w-4 h-4 text-indigo-600" />
-                Launch Student Mode (Aarav Sharma)
+                <GraduationCap className="w-4 h-4" />
+                Student: Aarav Sharma (23CSE104)
               </button>
               <button
                 onClick={() => handleDemoAccess('faculty')}
-                className="px-5 py-3 rounded-xl bg-indigo-800/80 hover:bg-indigo-700/80 text-white font-bold text-xs transition-all flex items-center gap-2 cursor-pointer border border-indigo-700"
+                className="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer"
               >
-                <Users className="w-4 h-4 text-indigo-300" />
-                Launch Faculty Mode (Dr. Priya Sengupta)
+                <Users className="w-4 h-4" />
+                Faculty: Dr. Priya Sengupta
               </button>
               <button
                 onClick={() => handleDemoAccess('admin')}
-                className="px-5 py-3 rounded-xl bg-indigo-800/80 hover:bg-indigo-700/80 text-white font-bold text-xs transition-all flex items-center gap-2 cursor-pointer border border-indigo-700"
+                className="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer"
               >
-                <ShieldCheck className="w-4 h-4 text-indigo-300" />
-                Launch Admin Mode (Dr. Rajesh Verma)
+                <ShieldCheck className="w-4 h-4" />
+                Admin: Dr. Rajesh Verma (Dean)
               </button>
             </div>
           </div>
@@ -387,21 +331,18 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 py-12 bg-white dark:bg-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-10 bg-white dark:bg-slate-950 text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-              <GraduationCap className="w-4 h-4" />
-            </div>
-            <span className="font-bold text-sm">CampusOne Management Platform</span>
+            <span className="font-bold text-slate-800 dark:text-slate-200">CampusOne</span>
+            <span>—</span>
+            <span>Digital Campus Operating System</span>
           </div>
-          <p className="text-xs text-slate-500">
-            Hackathon 2026 Project: "How technology simplifies everyday campus life."
-          </p>
-          <div className="flex gap-4 text-xs text-slate-400">
-            <Link to="/login" className="hover:text-indigo-600">Login</Link>
-            <Link to="/register" className="hover:text-indigo-600">Register</Link>
-            <Link to="/ai" className="hover:text-indigo-600">CampusAI</Link>
+          <p>National Smart Campus Hackathon 2026</p>
+          <div className="flex gap-4">
+            <Link to="/login" className="hover:text-slate-900 dark:hover:text-white">Portal Login</Link>
+            <Link to="/map" className="hover:text-slate-900 dark:hover:text-white">Campus Directory</Link>
+            <Link to="/ai" className="hover:text-slate-900 dark:hover:text-white">Handbook Assistant</Link>
           </div>
         </div>
       </footer>

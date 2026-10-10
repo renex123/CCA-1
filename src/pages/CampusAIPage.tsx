@@ -150,25 +150,27 @@ export const CampusAIPage: React.FC = () => {
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center shadow-md">
-            <Sparkles className="w-5 h-5 animate-spin-slow" />
+          <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold shadow-xs">
+            <BookOpen className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
-                CampusAI Assistant
+                Campus Knowledge & Academic Desk
               </h2>
-              <Badge variant="success" size="sm">Grounded Model</Badge>
+              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                Official Regulations Grounded
+              </span>
             </div>
             <p className="text-xs text-slate-500">
-              Personalized for {user?.full_name} • Grounded in verified regulations & real-time timetable
+              Verified against BPUT Academic Handbooks, Examination By-Laws, and Live Timetable Matrix
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 text-xs text-slate-400">
           <ShieldCheck className="w-4 h-4 text-emerald-500" />
-          <span>Hallucination-free campus grounding</span>
+          <span>Zero-hallucination policy citations</span>
         </div>
       </div>
 
@@ -178,7 +180,7 @@ export const CampusAIPage: React.FC = () => {
           <button
             key={idx}
             onClick={() => handleSend(q)}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-indigo-500 hover:text-indigo-600 transition-colors whitespace-nowrap cursor-pointer shadow-xs"
+            className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-600 transition-colors whitespace-nowrap cursor-pointer shadow-xs"
           >
             {q}
           </button>

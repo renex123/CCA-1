@@ -64,33 +64,41 @@ export const FacultyDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Faculty Profile Banner */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-800/60 border border-purple-700/60 text-xs font-semibold text-purple-200 mb-3">
-            <Users className="w-3.5 h-3.5" />
-            <span>Faculty ID: {user.faculty_id || 'FAC-CSE-04'} • Associate Professor</span>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+              Department of {user.department_name}
+            </span>
+            <span className="text-[10px] font-semibold text-slate-500">
+              Associate Professor & Head of Examination Cell
+            </span>
+            <span className="text-slate-300 dark:text-slate-700">•</span>
+            <span className="text-[10px] font-mono text-slate-500">
+              Faculty Code: <strong className="text-slate-900 dark:text-slate-100">{user.faculty_id || 'FAC-CSE-04'}</strong>
+            </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Welcome, {user.full_name} 🎓
+          <h2 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">
+            {user.full_name}
           </h2>
-          <p className="mt-1 text-xs sm:text-sm text-purple-200">
-            Department of {user.department_name} • 3 Assigned Sections Today
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            Teaching Allocation: 2 Active Lecture Courses, 1 Laboratory Section • 3 Sessions Scheduled Today
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <Button
-            size="sm"
-            variant="success"
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
             onClick={() => setIsLaunchModalOpen(true)}
-            leftIcon={<QrCode className="w-4 h-4" />}
+            className="px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
           >
+            <QrCode className="w-3.5 h-3.5" />
             Launch QR Attendance Session
-          </Button>
+          </button>
           <Link to="/announcements">
-            <Button size="sm" variant="outline" leftIcon={<PlusCircle className="w-4 h-4" />}>
-              Publish Notice
-            </Button>
+            <button className="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer">
+              <PlusCircle className="w-3.5 h-3.5 text-slate-500" />
+              Publish Circular
+            </button>
           </Link>
         </div>
       </div>
