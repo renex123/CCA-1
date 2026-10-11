@@ -4,8 +4,9 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'destructive' | 'ghost' | 'success';
+  variant?: 'primary' | 'secondary' | 'outline' | 'destructive' | 'ghost' | 'success' | 'brand' | 'brandOutline';
   size?: 'sm' | 'md' | 'lg' | 'icon';
+  pill?: boolean;
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
@@ -16,6 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   variant = 'primary',
   size = 'md',
+  pill = false,
   isLoading = false,
   disabled,
   leftIcon,
@@ -38,6 +40,10 @@ export const Button: React.FC<ButtonProps> = ({
       'text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-400 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100',
     success:
       'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm focus:ring-emerald-500 dark:bg-emerald-600 dark:hover:bg-emerald-500',
+    brand:
+      'bg-[#652b7c] hover:bg-[#522165] text-white shadow-md shadow-[#652b7c]/20 hover:shadow-lg hover:shadow-[#652b7c]/30 focus:ring-[#652b7c]',
+    brandOutline:
+      'border-2 border-[#652b7c] hover:bg-[#652b7c] hover:text-white text-[#652b7c] focus:ring-[#652b7c] dark:border-[#c27de2] dark:text-[#c27de2] dark:hover:bg-[#652b7c] dark:hover:text-white',
   };
 
   const sizeStyles = {
@@ -50,7 +56,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={twMerge(
-        clsx(baseStyles, variantStyles[variant], sizeStyles[size], className)
+        clsx(baseStyles, variantStyles[variant], sizeStyles[size], pill && 'rounded-full px-6 tracking-wide shadow-sm', className)
       )}
       disabled={disabled || isLoading}
       {...props}

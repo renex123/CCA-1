@@ -47,6 +47,7 @@ export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
 
   const [isTourModalOpen, setIsTourModalOpen] = useState(false);
+  const [isAdmissionModalOpen, setIsAdmissionModalOpen] = useState(false);
   const [activeTourTab, setActiveTourTab] = useState<'student' | 'faculty' | 'admin'>('student');
 
   const handleDemoAccess = (role: 'student' | 'faculty' | 'admin') => {
@@ -118,13 +119,13 @@ export const LandingPage: React.FC = () => {
               )}
             </button>
             <Link to="/login">
-              <Button variant="ghost" size="sm" className="text-xs hover:text-[#652b7c] dark:hover:text-[#c27de2]">
+              <button className="px-4 py-2 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-[#652b7c] hover:bg-[#faf0fc] dark:hover:text-[#c27de2] dark:hover:bg-[#250d2f]/50 transition-colors cursor-pointer">
                 Staff & Student Login
-              </Button>
+              </button>
             </Link>
             <button
               onClick={() => handleDemoAccess('student')}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#652b7c] to-[#542168] hover:from-[#522165] hover:to-[#461957] text-white text-xs font-semibold shadow-md shadow-[#652b7c]/25 transition-all cursor-pointer"
+              className="px-5 py-2.5 rounded-full bg-[#652b7c] hover:bg-[#522165] text-white text-xs font-semibold shadow-md shadow-[#652b7c]/25 transition-all cursor-pointer active:scale-95"
             >
               Launch Portal
             </button>
@@ -189,12 +190,20 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Action Buttons — White and #652B7C Mix */}
+              {/* Action Buttons — Pill/Capsule Styling matching user's reference */}
               <div className="space-y-4 pt-2">
                 <div className="flex flex-wrap items-center gap-3">
+                  {/* Exact "Admission Website" pill button from user's reference */}
+                  <button
+                    onClick={() => setIsAdmissionModalOpen(true)}
+                    className="px-8 py-3.5 rounded-full bg-[#652b7c] hover:bg-[#522165] text-white text-sm sm:text-base font-medium shadow-md shadow-[#652b7c]/25 hover:shadow-lg hover:shadow-[#652b7c]/35 transition-all flex items-center justify-center cursor-pointer active:scale-95 tracking-normal"
+                  >
+                    Admission Website
+                  </button>
+
                   <button
                     onClick={() => handleDemoAccess('student')}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#652b7c] to-[#783093] hover:from-[#522165] hover:to-[#652b7c] text-white text-sm font-bold shadow-lg shadow-[#652b7c]/30 hover:shadow-xl hover:shadow-[#652b7c]/40 transition-all flex items-center gap-2.5 cursor-pointer"
+                    className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#652b7c] to-[#783093] hover:from-[#522165] hover:to-[#652b7c] text-white text-sm font-semibold shadow-lg shadow-[#652b7c]/30 hover:shadow-xl hover:shadow-[#652b7c]/40 transition-all flex items-center gap-2.5 cursor-pointer active:scale-95"
                   >
                     <span>Explore CampusOne Portal</span>
                     <ArrowRight className="w-4 h-4" />
@@ -202,7 +211,7 @@ export const LandingPage: React.FC = () => {
 
                   <button
                     onClick={() => setIsTourModalOpen(true)}
-                    className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border-2 border-[#652b7c]/40 dark:border-[#652b7c]/70 hover:bg-[#fcf7fd] dark:hover:bg-[#250d2f]/50 text-[#652b7c] dark:text-[#c27de2] text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+                    className="px-6 py-3.5 rounded-full bg-white dark:bg-slate-900 border-2 border-[#652b7c]/50 dark:border-[#652b7c]/70 hover:bg-[#fcf7fd] dark:hover:bg-[#250d2f]/50 text-[#652b7c] dark:text-[#c27de2] text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer shadow-xs active:scale-95"
                   >
                     <Play className="w-4 h-4 fill-[#652b7c] text-[#652b7c] dark:fill-[#c27de2] dark:text-[#c27de2]" />
                     <span>Watch Interactive Tour</span>
@@ -214,19 +223,19 @@ export const LandingPage: React.FC = () => {
                   <span className="text-slate-500 dark:text-slate-400 font-semibold">1-Click Personas:</span>
                   <button
                     onClick={() => handleDemoAccess('student')}
-                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-[#652b7c] hover:text-[#652b7c] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 hover:border-[#652b7c] hover:text-[#652b7c] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-all shadow-xs cursor-pointer active:scale-95"
                   >
                     🎓 Student (Aarav)
                   </button>
                   <button
                     onClick={() => handleDemoAccess('faculty')}
-                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-[#652b7c] hover:text-[#652b7c] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 hover:border-[#652b7c] hover:text-[#652b7c] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-all shadow-xs cursor-pointer active:scale-95"
                   >
                     👩‍🏫 Faculty (Dr. Priya)
                   </button>
                   <button
                     onClick={() => handleDemoAccess('admin')}
-                    className="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:border-[#652b7c] hover:text-[#652b7c] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-colors cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 hover:border-[#652b7c] hover:text-[#652b7c] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium transition-all shadow-xs cursor-pointer active:scale-95"
                   >
                     🏛️ Dean (Dr. Rajesh)
                   </button>
@@ -604,21 +613,21 @@ export const LandingPage: React.FC = () => {
             <div className="mt-8 flex flex-wrap gap-3">
               <button
                 onClick={() => handleDemoAccess('student')}
-                className="px-5 py-3 rounded-xl bg-white text-[#3a1347] text-xs font-bold hover:bg-[#fbf3fc] transition-colors flex items-center gap-2 cursor-pointer shadow-md shadow-white/10"
+                className="px-6 py-3.5 rounded-full bg-white text-[#3a1347] text-xs font-bold hover:bg-[#fbf3fc] transition-all flex items-center gap-2 cursor-pointer shadow-md shadow-white/10 active:scale-95"
               >
                 <GraduationCap className="w-4 h-4 text-[#652b7c]" />
                 Student: Aarav Sharma (23CSE104)
               </button>
               <button
                 onClick={() => handleDemoAccess('faculty')}
-                className="px-5 py-3 rounded-xl bg-[#522165]/80 hover:bg-[#652b7c] text-white border border-[#8534a4]/60 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-full bg-[#522165]/80 hover:bg-[#652b7c] text-white border border-[#8534a4]/60 text-xs font-bold transition-all flex items-center gap-2 cursor-pointer active:scale-95"
               >
                 <Users className="w-4 h-4 text-[#d598ef]" />
                 Faculty: Dr. Priya Sengupta
               </button>
               <button
                 onClick={() => handleDemoAccess('admin')}
-                className="px-5 py-3 rounded-xl bg-[#522165]/80 hover:bg-[#652b7c] text-white border border-[#8534a4]/60 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-full bg-[#522165]/80 hover:bg-[#652b7c] text-white border border-[#8534a4]/60 text-xs font-bold transition-all flex items-center gap-2 cursor-pointer active:scale-95"
               >
                 <ShieldCheck className="w-4 h-4 text-[#d598ef]" />
                 Admin: Dr. Rajesh Verma (Dean)
@@ -737,18 +746,96 @@ export const LandingPage: React.FC = () => {
 
             {/* Direct Launch CTA */}
             <div className="flex items-center justify-end gap-3">
-              <Button variant="ghost" size="sm" onClick={() => setIsTourModalOpen(false)}>
+              <button
+                onClick={() => setIsTourModalOpen(false)}
+                className="px-4 py-2 rounded-full text-xs font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
+              >
                 Close Walkthrough
-              </Button>
+              </button>
               <button
                 onClick={() => {
                   setIsTourModalOpen(false);
                   handleDemoAccess(activeTourTab);
                 }}
-                className="px-4 py-2 rounded-xl bg-[#652b7c] hover:bg-[#522165] text-white text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-md shadow-[#652b7c]/25"
+                className="px-6 py-2.5 rounded-full bg-[#652b7c] hover:bg-[#522165] text-white text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-md shadow-[#652b7c]/25 active:scale-95"
               >
                 <span>Launch As {activeTourTab === 'student' ? 'Student' : activeTourTab === 'faculty' ? 'Faculty' : 'Admin'}</span>
                 <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Admission Website Modal (Triggered by 'Admission Website' Pill Button) */}
+      {isAdmissionModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-[#15071f] border-2 border-[#ebd0f3] dark:border-[#4b1d5c] rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
+            <button
+              onClick={() => setIsAdmissionModalOpen(false)}
+              className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-[#652b7c] dark:hover:text-[#c27de2] hover:bg-[#faf0fc] dark:hover:bg-[#250d2f]/50 cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#652b7c] dark:text-[#c27de2] mb-1">
+              <GraduationCap className="w-4 h-4" />
+              <span>Academic Year 2026–2027 Admissions</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white">
+              Autonomous Campus Admissions Portal
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-6">
+              BPUT Affiliated Autonomous Engineering & Management Colleges • Direct Counseling & Merit Allotment
+            </p>
+
+            {/* Program Highlights */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+              <div className="p-3.5 rounded-2xl bg-[#faf0fc] dark:bg-[#250d2f]/50 border border-[#ebd0f3] dark:border-[#4b1d5c]">
+                <div className="text-xs font-bold text-[#652b7c] dark:text-[#c27de2]">Undergraduate (B.Tech)</div>
+                <div className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 space-y-0.5">
+                  <p>• Computer Science & Engineering (180 seats)</p>
+                  <p>• Artificial Intelligence & ML (120 seats)</p>
+                  <p>• Electronics & Communication (120 seats)</p>
+                </div>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-[#faf0fc] dark:bg-[#250d2f]/50 border border-[#ebd0f3] dark:border-[#4b1d5c]">
+                <div className="text-xs font-bold text-[#652b7c] dark:text-[#c27de2]">Postgraduate (M.Tech / MBA / MCA)</div>
+                <div className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 space-y-0.5">
+                  <p>• M.Tech Computer Science & VLSI</p>
+                  <p>• Master of Business Administration</p>
+                  <p>• Master of Computer Applications</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Admission Metrics */}
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-[#ebd0f3]/70 dark:border-[#3b1549] space-y-2 mb-6 text-xs text-slate-700 dark:text-slate-300">
+              <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white">
+                <CheckCircle2 className="w-4 h-4 text-[#652b7c]" />
+                <span>Eligibility & Selection Process:</span>
+              </div>
+              <p>• Valid JEE (Main) / OJEE rank required for B.Tech admission counseling.</p>
+              <p>• Merit scholarship waivers up to 100% available for top 100 state rank holders.</p>
+              <p>• Verified document scrutiny and Bonafide certificates issued via CampusOne portal.</p>
+            </div>
+
+            {/* Action Buttons — Pill Style */}
+            <div className="flex flex-wrap items-center justify-end gap-3">
+              <button
+                onClick={() => setIsAdmissionModalOpen(false)}
+                className="px-5 py-2.5 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              >
+                Close Window
+              </button>
+              <button
+                onClick={() => {
+                  setIsAdmissionModalOpen(false);
+                  handleDemoAccess('student');
+                }}
+                className="px-8 py-3 rounded-full bg-[#652b7c] hover:bg-[#522165] text-white text-xs sm:text-sm font-medium transition-all shadow-md shadow-[#652b7c]/25 active:scale-95 cursor-pointer"
+              >
+                Enter Student Portal Demo
               </button>
             </div>
           </div>
