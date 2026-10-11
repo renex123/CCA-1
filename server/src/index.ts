@@ -1,5 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 import { config } from './config';
 import authRoutes from './routes/auth.routes';
 import attendanceRoutes from './routes/attendance.routes';
@@ -10,6 +13,10 @@ import eventsRoutes from './routes/events.routes';
 import analyticsRoutes from './routes/analytics.routes';
 import aiRoutes from './routes/ai.routes';
 import { campusStore } from './data/campusStore';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.resolve(__dirname, '../../dist');
 
 const app = express();
 
@@ -49,7 +56,12 @@ app.get('/api/health', (req: Request, res: Response) => {
   });
 });
 
-// Mount Routes
+// Serve frontend static build files (HTML, CSS, JS, Images)
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+}
+
+// Mount API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/timetable', timetableRoutes);
@@ -58,6 +70,23 @@ app.use('/api/services', servicesRoutes);
 app.use('/api', eventsRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/ai', aiRoutes);
+
+// SPA Fallback: serve React frontend index.html for all non-API GET routes
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.method === 'GET' && !req.path.startsWith('/api')) {
+    const indexPath = path.join(distPath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+      return;
+    }
+  }
+  next();
+});
+
+// 404 handler for unknown API routes
+app.use('/api', (req: Request, res: Response) => {
+  res.status(404).json({ success: false, error: `API route ${req.originalUrl} not found.` });
+});
 
 // Global Error Handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
