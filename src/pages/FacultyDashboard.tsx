@@ -29,6 +29,11 @@ import {
   Eye,
   Sliders,
   X,
+  Megaphone,
+  FileSpreadsheet,
+  UserCheck,
+  Search,
+  ShieldAlert,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
@@ -62,6 +67,16 @@ interface StudentSubmission {
   remarks?: string;
 }
 
+interface RosterStudent {
+  id: string;
+  name: string;
+  enrollment: string;
+  section: string;
+  attendancePercent: number;
+  internalScore: number;
+  status: 'Good Standing' | 'At Risk' | 'Debarred Risk';
+}
+
 export const FacultyDashboard: React.FC = () => {
   const { user } = useAuth();
   const [, setTick] = useState(0);
@@ -72,6 +87,9 @@ export const FacultyDashboard: React.FC = () => {
   const [isAssignmentModalOpen, setIsAssignmentModalOpen] = useState(false);
   const [isGradeModalOpen, setIsGradeModalOpen] = useState(false);
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
+  const [isCircularModalOpen, setIsCircularModalOpen] = useState(false);
+  const [isRosterModalOpen, setIsRosterModalOpen] = useState(false);
+  const [isMarksModalOpen, setIsMarksModalOpen] = useState(false);
 
   // Form States
   const [selectedSubjectId, setSelectedSubjectId] = useState('sub-cs601');
@@ -83,6 +101,28 @@ export const FacultyDashboard: React.FC = () => {
   const [newAssignmentDesc, setNewAssignmentDesc] = useState('');
   const [newAssignmentDue, setNewAssignmentDue] = useState('2026-03-28');
   const [newAssignmentMaxMarks, setNewAssignmentMaxMarks] = useState('25');
+
+  // Broadcast Circular Form State
+  const [circularTitle, setCircularTitle] = useState('');
+  const [circularCategory, setCircularCategory] = useState<'exam' | 'academic' | 'events'>('academic');
+  const [circularContent, setCircularContent] = useState('');
+  const [circularPriority, setCircularPriority] = useState<'normal' | 'urgent' | 'pinned'>('urgent');
+
+  // Active Subject for Roster & Marks Modal
+  const [activeCourseContext, setActiveCourseContext] = useState({
+    code: 'CS-601',
+    name: 'Distributed Systems & Cloud Computing',
+  });
+
+  // Internal Marks form state
+  const [internalMarks, setInternalMarks] = useState<Record<string, string>>({
+    'std-1': '28',
+    'std-2': '29',
+    'std-3': '25',
+    'std-4': '27',
+    'std-5': '18',
+    'std-6': '21',
+  });
 
   // Toast feedback state
   const [feedbackToast, setFeedbackToast] = useState<string | null>(null);
@@ -107,6 +147,16 @@ export const FacultyDashboard: React.FC = () => {
     'sub-3': '19',
     'sub-4': '24',
   });
+
+  // Class Roster Scholars
+  const rosterStudents: RosterStudent[] = [
+    { id: 'std-1', name: 'Aarav Sharma', enrollment: '2301106104', section: 'A', attendancePercent: 88.8, internalScore: 28, status: 'Good Standing' },
+    { id: 'std-2', name: 'Ananya Mishra', enrollment: '2301106102', section: 'A', attendancePercent: 94.4, internalScore: 29, status: 'Good Standing' },
+    { id: 'std-3', name: 'Rohan Sen', enrollment: '2301106108', section: 'A', attendancePercent: 86.1, internalScore: 25, status: 'Good Standing' },
+    { id: 'std-4', name: 'Pooja Mohanty', enrollment: '2301106115', section: 'A', attendancePercent: 91.2, internalScore: 27, status: 'Good Standing' },
+    { id: 'std-5', name: 'Rohan Mehra', enrollment: '2301102045', section: 'A', attendancePercent: 58.3, internalScore: 18, status: 'Debarred Risk' },
+    { id: 'std-6', name: 'Kavita Jena', enrollment: '2301106088', section: 'A', attendancePercent: 69.4, internalScore: 21, status: 'At Risk' },
+  ];
 
   useEffect(() => {
     return db.subscribe(() => setTick((t) => t + 1));
@@ -230,6 +280,32 @@ export const FacultyDashboard: React.FC = () => {
     setNewAssignmentDesc('');
   };
 
+  const handlePublishCircular = () => {
+    if (!circularTitle || !circularContent) return;
+    db.createAnnouncement(
+      {
+        title: circularTitle,
+        content: circularContent,
+        category: circularCategory,
+        priority: circularPriority,
+        publisher_id: user.id,
+        publisher_name: user.full_name || 'Dr. Priya Sengupta',
+        publisher_role: 'Associate Professor & Course Coordinator',
+        target_audience: 'students',
+      },
+      user
+    );
+    setIsCircularModalOpen(false);
+    showToast(`Circular "${circularTitle}" broadcasted to all enrolled course feeds!`);
+    setCircularTitle('');
+    setCircularContent('');
+  };
+
+  const handleSaveInternalMarks = () => {
+    setIsMarksModalOpen(false);
+    showToast(`Internal Assessment Marks for ${activeCourseContext.code} committed to BPUT Examination Controller!`);
+  };
+
   const handleSendWarning = () => {
     if (!selectedDefaulter) return;
     setIsWarningModalOpen(false);
@@ -240,11 +316,11 @@ export const FacultyDashboard: React.FC = () => {
   const handleExportCSV = () => {
     const csvContent =
       'Enrollment,Student Name,Subject Code,Classes Attended,Total Classes,Attendance %\n' +
-      '23CSE101,Aarav Sharma,CS-601,32,36,88.8%\n' +
-      '23CSE102,Ananya Mishra,CS-601,34,36,94.4%\n' +
-      '23CSE104,Rohan Sen,CS-601,31,36,86.1%\n' +
-      '23ME045,Rohan Mehra,CS-601,21,36,58.3%\n' +
-      '23CSE088,Kavita Jena,CS-601,25,36,69.4%\n';
+      '2301106104,Aarav Sharma,CS-601,32,36,88.8%\n' +
+      '2301106102,Ananya Mishra,CS-601,34,36,94.4%\n' +
+      '2301106108,Rohan Sen,CS-601,31,36,86.1%\n' +
+      '2301102045,Rohan Mehra,CS-601,21,36,58.3%\n' +
+      '2301106088,Kavita Jena,CS-601,25,36,69.4%\n';
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -274,7 +350,7 @@ export const FacultyDashboard: React.FC = () => {
         <div className="space-y-2 relative z-10">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#fbf3fc] dark:bg-[#250d2f] text-[#652b7c] dark:text-[#c27de2] border border-[#ebd0f3] dark:border-[#4b1d5c]">
-              Academic Faculty Portal
+              Academic Faculty Command Center
             </span>
             <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
               Department of {user.department_name || 'Computer Science & Engineering'}
@@ -319,6 +395,14 @@ export const FacultyDashboard: React.FC = () => {
           </button>
 
           <button
+            onClick={() => setIsCircularModalOpen(true)}
+            className="px-4 py-2.5 rounded-full bg-white dark:bg-slate-900 border border-[#ebd0f3] dark:border-[#4b1d5c] hover:border-[#652b7c] text-[#652b7c] dark:text-[#c27de2] text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95"
+          >
+            <Megaphone className="w-3.5 h-3.5" />
+            <span>Broadcast Circular</span>
+          </button>
+
+          <button
             onClick={handleExportCSV}
             className="px-4 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95"
             title="Export Attendance Audit CSV"
@@ -329,8 +413,8 @@ export const FacultyDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Live Lecture Control Station (Active Projector Display Card) */}
-      {activeSession && (
+      {/* Live Lecture Control Station — Always Ready Banner */}
+      {activeSession ? (
         <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#200929] via-[#351144] to-[#1a0721] text-white border-2 border-[#652b7c] shadow-2xl shadow-[#652b7c]/30 flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left">
             <div className="p-3.5 bg-white rounded-2xl shadow-xl border-4 border-[#ebd0f3] shrink-0">
@@ -389,6 +473,33 @@ export const FacultyDashboard: React.FC = () => {
               <span>Close Session</span>
             </button>
           </div>
+        </div>
+      ) : (
+        <div className="p-6 rounded-3xl bg-[#faf0fc] dark:bg-[#1a0822] border-2 border-[#ebd0f3] dark:border-[#3b1549] flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4 text-center sm:text-left">
+            <div className="w-12 h-12 rounded-2xl bg-[#652b7c] text-white flex items-center justify-center shrink-0 shadow-md shadow-[#652b7c]/20">
+              <QrCode className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
+                Classroom Station Ready
+              </div>
+              <h4 className="text-base font-bold text-slate-900 dark:text-white">
+                Upcoming Lecture: Distributed Systems & Cloud (CS-601)
+              </h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Classroom: <strong className="text-slate-700 dark:text-slate-300">LH-204</strong> (Aryabhata Block) • Section A • Ready for live QR projection
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setIsLaunchModalOpen(true)}
+            className="px-6 py-3 rounded-full bg-[#652b7c] hover:bg-[#522165] text-white text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-md shadow-[#652b7c]/25 active:scale-95"
+          >
+            <Play className="w-4 h-4 fill-white" />
+            <span>Launch Lecture Session Now</span>
+          </button>
         </div>
       )}
 
@@ -450,7 +561,7 @@ export const FacultyDashboard: React.FC = () => {
                     key={course.subjectCode}
                     className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-800 space-y-3"
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-[#652b7c]/10 text-[#652b7c] dark:bg-[#652b7c]/30 dark:text-[#c27de2]">
@@ -466,7 +577,8 @@ export const FacultyDashboard: React.FC = () => {
                         </h4>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      {/* Course Action Buttons */}
+                      <div className="flex flex-wrap items-center gap-2">
                         <button
                           onClick={() => {
                             setSelectedSubjectId(course.subjectCode === 'CS-601' ? 'sub-cs601' : 'sub-cs604');
@@ -476,6 +588,28 @@ export const FacultyDashboard: React.FC = () => {
                         >
                           <QrCode className="w-3.5 h-3.5" />
                           <span>Start QR</span>
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            setActiveCourseContext({ code: course.subjectCode, name: course.subjectName });
+                            setIsRosterModalOpen(true);
+                          }}
+                          className="px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 hover:border-[#652b7c] text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer"
+                        >
+                          <Users className="w-3.5 h-3.5 text-slate-500" />
+                          <span>Class Roster</span>
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            setActiveCourseContext({ code: course.subjectCode, name: course.subjectName });
+                            setIsMarksModalOpen(true);
+                          }}
+                          className="px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 hover:border-[#652b7c] text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer"
+                        >
+                          <FileSpreadsheet className="w-3.5 h-3.5 text-slate-500" />
+                          <span>Internal Marks</span>
                         </button>
                       </div>
                     </div>
@@ -881,6 +1015,163 @@ export const FacultyDashboard: React.FC = () => {
           </div>
         </Modal>
       )}
+
+      {/* MODAL 6: Broadcast Department Circular */}
+      <Modal
+        isOpen={isCircularModalOpen}
+        onClose={() => setIsCircularModalOpen(false)}
+        title="Broadcast Course Circular / Department Notice"
+        description="Publish official circular to enrolled student feeds and dashboard alerts."
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setIsCircularModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="brand" pill onClick={handlePublishCircular} leftIcon={<Send className="w-4 h-4" />}>
+              Broadcast Notice
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-4">
+          <Input
+            label="Notice Title"
+            placeholder="e.g. Mid-Term Lab Evaluation & Project Guidelines"
+            value={circularTitle}
+            onChange={(e) => setCircularTitle(e.target.value)}
+          />
+
+          <div className="grid grid-cols-2 gap-3">
+            <Select
+              label="Notice Category"
+              value={circularCategory}
+              onChange={(e) => setCircularCategory(e.target.value as any)}
+            >
+              <option value="academic">Academic & Curriculum</option>
+              <option value="exam">Examination & Evaluation</option>
+              <option value="events">Department Event / Seminar</option>
+            </Select>
+
+            <Select
+              label="Priority Level"
+              value={circularPriority}
+              onChange={(e) => setCircularPriority(e.target.value as any)}
+            >
+              <option value="urgent">Urgent Alert (Popup Banner)</option>
+              <option value="pinned">Pinned Notice</option>
+              <option value="normal">Standard Announcement</option>
+            </Select>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              Notice Body
+            </label>
+            <textarea
+              rows={4}
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#652b7c]"
+              placeholder="Enter full notice text for students..."
+              value={circularContent}
+              onChange={(e) => setCircularContent(e.target.value)}
+            />
+          </div>
+        </div>
+      </Modal>
+
+      {/* MODAL 7: Class Roster Viewer */}
+      <Modal
+        isOpen={isRosterModalOpen}
+        onClose={() => setIsRosterModalOpen(false)}
+        title={`Class Roster — ${activeCourseContext.code}: ${activeCourseContext.name}`}
+        description="Comprehensive scholar roster with verified attendance percentages and exam standing."
+        footer={
+          <Button variant="ghost" onClick={() => setIsRosterModalOpen(false)}>
+            Close Roster
+          </Button>
+        }
+      >
+        <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+          <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs flex justify-between font-bold text-slate-600 dark:text-slate-300">
+            <span>Scholar Name / Roll</span>
+            <span>Turnout Rate & Exam Standing</span>
+          </div>
+          {rosterStudents.map((std) => (
+            <div
+              key={std.id}
+              className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
+            >
+              <div>
+                <div className="font-bold text-slate-900 dark:text-white">{std.name}</div>
+                <div className="text-[11px] font-mono text-slate-500">Roll: {std.enrollment} • Sec {std.section}</div>
+              </div>
+
+              <div className="text-right">
+                <span className={`font-mono font-bold ${std.attendancePercent >= 75 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                  {std.attendancePercent}%
+                </span>
+                <div>
+                  <span
+                    className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                      std.status === 'Good Standing'
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : std.status === 'At Risk'
+                        ? 'bg-amber-100 text-amber-700'
+                        : 'bg-rose-100 text-rose-700'
+                    }`}
+                  >
+                    {std.status}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Modal>
+
+      {/* MODAL 8: Internal Assessment Marks Entry */}
+      <Modal
+        isOpen={isMarksModalOpen}
+        onClose={() => setIsMarksModalOpen(false)}
+        title={`Internal Marks Entry — ${activeCourseContext.code}`}
+        description="Record internal examination scores (Max: 30 Marks) for university board submission."
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setIsMarksModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="brand" pill onClick={handleSaveInternalMarks} leftIcon={<Check className="w-4 h-4" />}>
+              Save & Commit to Exam Cell
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+          {rosterStudents.map((std) => (
+            <div
+              key={std.id}
+              className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs"
+            >
+              <div>
+                <div className="font-bold text-slate-900 dark:text-white">{std.name}</div>
+                <div className="text-[11px] font-mono text-slate-500">Roll: {std.enrollment}</div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-slate-500 font-semibold">Mid-Sem Score:</span>
+                <input
+                  type="number"
+                  max={30}
+                  min={0}
+                  value={internalMarks[std.id] || std.internalScore}
+                  onChange={(e) => setInternalMarks({ ...internalMarks, [std.id]: e.target.value })}
+                  className="w-14 px-2 py-1 rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-center font-bold font-mono focus:ring-1 focus:ring-[#652b7c]"
+                />
+                <span className="text-slate-400">/ 30</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Modal>
     </div>
   );
 };
